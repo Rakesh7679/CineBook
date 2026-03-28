@@ -2,20 +2,7 @@ import { useEffect, useState } from "react";
 import axios from "axios";
 
 function App() {
-  const [notes, setNotes] = useState([
-    {
-      title: "Sample Note",
-      description: "This is a sample note description.",
-    },
-    {
-      title: "Another Note",
-      description: "This is another sample note description.",
-    },
-    {
-      title: "Third Note",
-      description: "This is the third sample note description.",
-    },
-  ]);
+  const [notes, setNotes] = useState([]);
 
   function submitHandeler(e){
     e.preventDefault();
@@ -24,7 +11,7 @@ function App() {
     // console.log(title.value, description.value);
 
     // Create a new note
-    axios.post("http://localhost:3000/notes",{title: title.value, description: description.value})
+    axios.post("https://practice-backend-and-deployment.onrender.com/notes",{title: title.value, description: description.value})
     .then((res)=>{
       console.log(res.data);
       form.reset();
@@ -35,7 +22,7 @@ function App() {
 
   function deleteNote(noteId){
      //Delete a note
-    axios.delete("http://localhost:3000/notes/"+noteId)
+    axios.delete("https://practice-backend-and-deployment.onrender.com/notes/"+noteId)
     .then(res=>{
       console.log(res.data);
       fetchNotes()
@@ -44,7 +31,7 @@ function App() {
 
   function updateNote(note){
     // Backend expects PUT with both title and description
-    axios.put("http://localhost:3000/notes/" + note._id, {
+    axios.put("https://practice-backend-and-deployment.onrender.com/notes/" + note._id, {
       title: note.title,
       description: "Updated description",
     })
@@ -57,7 +44,7 @@ function App() {
 
   // Fetch notes from the backend API
    function fetchNotes() {
-    axios.get("http://localhost:3000/notes")
+    axios.get("https://practice-backend-and-deployment.onrender.com/notes")
       .then((response) => {
         setNotes(response.data);
       })
